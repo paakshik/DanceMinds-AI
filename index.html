@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DanceAI Studio - AI-Powered Dance Choreography</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div id="loadingScreen" class="loading-screen">
+        <div class="loading-content">
+            <div class="loading-logo">
+                <div class="dance-icon"></div>
+                <h1>DanceMinds AI</h1>
+            </div>
+            <div class="loading-spinner"></div>
+        </div>
+    </div>
+
+    <!-- Main Application -->
+    <div id="app" class="app hidden">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-icon" src=""></div>
+                    <h1 id="heading1">DanceMinds AI</h1>
+                </div>
+                <div class="header-actions">
+                    <button class="btn-icon" id="settingsBtn" aria-label="Settings">
+                        <span id="settings" class="icon">⚙️</span>
+                    </button>
+                    <button class="btn-icon mobile-menu-btn" id="mobileMenuBtn" aria-label="Menu">
+                        <span class="hamburger">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </span>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main">
+            <div class="main-content">
+                <!-- Input Form Section -->
+                <section class="input-section">
+                    <div class="card form-card">
+                        <h2 id="heading2"><span id="letter">Create Dance Choreography</span> <span>👇</span></h2>
+                        
+                        <!-- Music Upload -->
+                        <div class="form-group">
+                            <label id="leveling" class="form-label">Upload Music</label>
+                            <div class="upload-area" id="uploadArea">
+                                <input type="file" id="musicFile" accept="audio/*" class="file-input">
+                                <div class="upload-content">
+                                    <div class="upload-icon">🎵</div>
+                                    <p>Drag & drop your music file here</p>
+                                    <span class="or-text">or</span>
+                                    <button type="button" class="btn btn--secondary" id="selectFileBtn">Select File</button>
+                                </div>
+                                <div class="file-preview hidden" id="filePreview">
+                                    <div class="file-info">
+                                        <div class="file-details">
+                                            <span class="file-name" id="fileName"></span>
+                                            <span class="file-size" id="fileSize"></span>
+                                        </div>
+                                        <button type="button" class="btn-remove" id="removeFile">✕</button>
+                                    </div>
+                                    
+                                    <!-- Integrated Music Player -->
+                                    <div class="music-player" id="musicPlayer">
+                                        <div class="player-controls">
+                                            <button class="player-btn" id="skipBackBtn" title="Skip back 10s">⏪</button>
+                                            <button class="player-btn player-btn-main" id="playPauseBtn" title="Play/Pause">
+                                                <span class="play-icon">▶️</span>
+                                                <span class="pause-icon hidden">⏸️</span>
+                                                <div class="loading-spinner player-loading hidden"></div>
+                                            </button>
+                                            <button class="player-btn" id="skipForwardBtn" title="Skip forward 10s">⏩</button>
+                                        </div>
+                                        
+                                        <div class="player-progress">
+                                            <span class="time-current" id="currentTime">0:00</span>
+                                            <div class="progress-bar-container">
+                                                <div class="progress-bar" id="progressBar">
+                                                    <div class="progress-fill" id="progressFill"></div>
+                                                    <div class="progress-handle" id="progressHandle"></div>
+                                                </div>
+                                            </div>
+                                            <span class="time-total" id="totalTime">0:00</span>
+                                        </div>
+                                        
+                                        <div class="player-volume">
+                                            <span class="volume-icon">🔊</span>
+                                            <div class="volume-slider">
+                                                <input type="range" id="volumeSlider" min="0" max="1" step="0.05" value="0.7">
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="music-visualizer" id="musicVisualizer">
+                                            <div class="waveform">
+                                                <div class="wave-bar"></div>
+                                                <div class="wave-bar"></div>
+                                                <div class="wave-bar"></div>
+                                                <div class="wave-bar"></div>
+                                                <div class="wave-bar"></div>
+                                                <div class="wave-bar"></div>
+                                                <div class="wave-bar"></div>
+                                                <div class="wave-bar"></div>
+                                            </div>
+                                            <div class="music-info">
+                                                <span class="bpm-display">BPM: <span id="bpmValue">--</span></span>
+                                                <span class="genre-display">Genre: <span id="genreValue">Detecting...</span></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <audio id="audioElement" preload="metadata"></audio>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Dance Style Selection -->
+                        <div class="form-group">
+                            <label class="form-label" for="danceStyle">Dance Style</label>
+                            <div class="select-wrapper">
+                                <select id="danceStyle" class="form-control select-dance" required>
+                                    <option value="">Select a dance style...</option>
+                                </select>
+                                <div class="select-icon">▼</div>
+                            </div>
+                        </div>
+
+                        <!-- Age and Height -->
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label" for="age">Age</label>
+                                <input type="number" id="age" class="form-control" min="5" max="100" placeholder="Enter your age......" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="height">PROFESSION:</label>
+                                <div class="input-group">
+                                    <!-- <input type="number" id="height" class="form-control" placeholder="170" required> -->
+                                    <!-- <button type="button" class="unit-toggle" id="unitToggle" data-unit="cm">cm</button> -->
+                                    <select name="" id="height" class="form-control" placeholder="Select your profession">
+                                        <option id="place">Select your need of use.......</option>
+                                        <option value="choreographer" class="opt">Choreographer</option>
+                                        <option value="family event dancer" class="opt">Family event dancer</option>
+                                        <option value="social media influencer" class="opt">Social media influencer</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Generate Button -->
+                        <button type="button" class="btn btn--primary btn-generate" id="generateBtn">
+                            <span class="btn-text">Generate Dance Moves</span>
+                            <span class="btn-loading hidden">
+                                <div class="spinner"></div>
+                                Generating...
+                            </span>
+                        </button>
+                    </div>
+
+                    <!-- Generated Content Display -->
+                    <div class="card result-card hidden" id="resultCard">
+                        <div class="result-header">
+                            <h3>Generated Choreography</h3>
+                            <div class="result-actions">
+                                <button class="btn btn--secondary btn--sm" id="saveBtn">Save</button>
+                                <button class="btn btn--outline btn--sm" id="shareBtn">Share</button>
+                                <button class="btn btn--outline btn--sm" id="exportBtn">Export PDF</button>
+                            </div>
+                        </div>
+                        <div class="result-content" id="resultContent">
+                            <!-- Generated content will be inserted here -->
+                        </div>
+                    </div>
+                </section>
+
+                <!-- History Panel -->
+                <aside class="history-panel" id="historyPanel">
+                    <div class="history-header">
+                        <h3 id="txt2">Recent Generations</h3>
+                        <div class="history-actions">
+                            <button class="btn-icon" id="collapseHistoryBtn" aria-label="Collapse Panel">
+                                <span id="saveButton" class="icon"></span>
+                            </button>
+                            <button class="btn-icon" id="clearHistoryBtn" aria-label="Clear History" src="">
+                                <span id="clearHistory"></span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="history-content" id="historyContent">
+                        <div class="history-empty">
+                            <div class="empty-icon">📝</div>
+                            <p>No dance generations yet</p>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </main>
+
+        <!-- Sticky Music Player (when playing) -->
+        <div class="sticky-player hidden" id="stickyPlayer">
+            <div class="sticky-player-content">
+                <div class="now-playing">
+                    <span class="now-playing-icon">🎵</span>
+                    <span class="now-playing-text" id="nowPlayingText">Now Playing</span>
+                </div>
+                <div class="sticky-controls">
+                    <button class="player-btn" id="stickyPlayPause">⏸️</button>
+                    <div class="sticky-progress">
+                        <div class="sticky-progress-fill" id="stickyProgressFill"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Settings Modal -->
+        <div class="modal hidden" id="settingsModal">
+            <div class="modal-overlay" id="modalOverlay"></div>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Settings</h2>
+                    <button class="btn-icon" id="closeModalBtn" aria-label="Close">
+                        <span class="icon">✕</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <!-- Theme Selection -->
+                    <div class="setting-group">
+                        <h3>Theme</h3>
+                        <div class="theme-grid" id="themeGrid">
+                            <!-- Theme options will be inserted here -->
+                        </div>
+                    </div>
+
+                    <!-- Color Scheme -->
+                    <div class="setting-group">
+                        <h3>Color Schemes</h3>
+                        <div class="color-grid" id="colorGrid">
+                            <!-- Color options will be inserted here -->
+                        </div>
+                    </div>
+
+                    <!-- Animation Preferences -->
+                    <div class="setting-group">
+                        <h3>Animation Preferences</h3>
+                        <div class="animation-options" id="animationOptions">
+                            <!-- Animation options will be inserted here -->
+                        </div>
+                    </div>
+
+                    <!-- Video Quality -->
+                    <div class="setting-group">
+                        <h3>Video Quality</h3>
+                        <div class="quality-options" id="qualityOptions">
+                            <!-- Quality options will be inserted here -->
+                        </div>
+                    </div>
+
+                    <!-- Export Options -->
+                    <div class="setting-group">
+                        <h3>Export Options</h3>
+                        <div class="export-options">
+                            <label class="toggle">
+                                <input type="checkbox" id="pdfExportToggle" checked>
+                                <span class="toggle-slider"></span>
+                                <span class="toggle-label">Enable PDF Export</span>
+                            </label>
+                            <label class="toggle">
+                                <input type="checkbox" id="playlistSaveToggle" checked>
+                                <span class="toggle-slider"></span>
+                                <span class="toggle-label">Save Video Playlists</span>
+                            </label>
+                            <label class="toggle">
+                                <input type="checkbox" id="shareLinkToggle" checked>
+                                <span class="toggle-slider"></span>
+                                <span class="toggle-label">Enable Routine Sharing</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Toast Notifications -->
+        <div class="toast-container" id="toastContainer"></div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
