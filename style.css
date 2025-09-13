@@ -913,7 +913,7 @@ body {
   background-position: center;
   width: 45px;
   height: 45px;
-  background-image: url(DanceMindAI[1].jpg);
+  background-image: url(DanceMindAI[1].png);
   animation: pulse 2s ease-in-out infinite;
 }
 
@@ -929,7 +929,7 @@ body {
 }
 
 #saveButton{
-  background-image: url(savings[1].jpg);
+  background-image: url(savings[1].png);
   background-size: contain;
   width: 43px;
   height: 43px;
@@ -955,7 +955,7 @@ body {
 }
 
 #clearHistory {
-  background-image: url(clearhistory[1].jpg);
+  background-image: url(clearhistory[1].png);
   background-size: contain;
   width: 43px;
   height: 43px;
