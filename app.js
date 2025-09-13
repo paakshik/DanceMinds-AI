@@ -840,7 +840,7 @@ class DanceAIApp {
             <div class="result-info" style="padding: 1.5rem; background: var(--color-bg-3); border-radius: var(--border-radius-sm); margin-bottom: 2rem;">
                 <h4>${result.style} Video Choreography</h4>
                 <p><strong>Music:</strong> ${result.music}</p>
-                <p><strong>Age:</strong> ${result.age} years | <strong>Choreography Style:</strong> ${result.height}</p>
+                <p><strong>Age:</strong> ${result.age} years | <strong>Choreography Style:</strong> ${result.choreography_style}</p>
                 <p><strong>Quality:</strong> ${result.quality} | <strong>Steps:</strong> ${result.videoSteps.length} videos</p>
             </div>
             
