@@ -922,10 +922,10 @@ body {
 #letter{
   font-size: 40px;
   background: linear-gradient(90deg, #fa2f07, #24dd33);
-  -webkit-background-clip: text;  /* for Chrome, Safari */
+  -webkit-background-clip: text; 
   -webkit-text-fill-color: transparent; /* make text transparent to show background */
-  background-clip: text;  /* standard property */
-  color: transparent; /* fallback */
+  background-clip: text; 
+  color: transparent; 
 }
 
 #saveButton{
