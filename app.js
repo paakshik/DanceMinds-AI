@@ -639,7 +639,7 @@ class DanceAIApp {
                     option.value = style;
                     option.textContent = style;
                     optgroup.appendChild(option);
-                    if(style != "Hip-Hop") {
+                    if(style != "Hip-Hop" || style != "Bharatanatyam" || style != "Bharatanatyam" style != "Kathak") {
                         option.style.filter = "blur(2px)";   // blur effect
                         option.style.color = "#999";         // lighter text
                         option.disabled = "true"; // prevent clicking
