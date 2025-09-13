@@ -776,7 +776,7 @@ class DanceAIApp {
             music: musicName,
             style: style,
             age: parseInt(age),
-            height: `${height}${this.heightUnit}`,
+            choreography_style: `${height}`,
             videoSteps: videoSteps,
             quality: this.videoQuality
         };
@@ -840,7 +840,7 @@ class DanceAIApp {
             <div class="result-info" style="padding: 1.5rem; background: var(--color-bg-3); border-radius: var(--border-radius-sm); margin-bottom: 2rem;">
                 <h4>${result.style} Video Choreography</h4>
                 <p><strong>Music:</strong> ${result.music}</p>
-                <p><strong>Age:</strong> ${result.age} years | <strong>Height:</strong> ${result.height}</p>
+                <p><strong>Age:</strong> ${result.age} years | <strong>Choreography Style:</strong> ${result.height}</p>
                 <p><strong>Quality:</strong> ${result.quality} | <strong>Steps:</strong> ${result.videoSteps.length} videos</p>
             </div>
             
@@ -953,7 +953,7 @@ class DanceAIApp {
         const historyHTML = this.history.map(item => `
             <div class="history-item" data-id="${item.id}">
                 <h4>${item.style}</h4>
-                <p>Age: ${item.age} | Height: ${item.height}</p>
+                <p>Age: ${item.age} | Choreography_style: ${item.height}</p>
                 <p>Music: ${item.music}</p>
                 <div class="history-item-time">
                     ${this.formatDate(item.timestamp)}
